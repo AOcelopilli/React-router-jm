@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Acerca } from "../pages/Acerca";
+import { Contacto } from "../pages/Contacto";
 
 export const ConceptosBasicos = () => {
   return (
@@ -7,11 +9,17 @@ export const ConceptosBasicos = () => {
       <Router>
         <Switch>
           <Route exact path="/acerca">
-            <h3>Acerca</h3>
+            <Acerca />
           </Route>
-          <Route exact path="/contacto">
-            <h3>Contacto</h3>
-          </Route>
+          {/* <Route exact path="/contacto" component={Contacto} /> */}
+          <Route
+            path="/contacto"
+            children={
+              <>
+                <Contacto /> <p>Holi</p>
+              </>
+            }
+          />
           <Route exact path="/">
             <h3>Home</h3>
             <p>Bienvenidos</p>
