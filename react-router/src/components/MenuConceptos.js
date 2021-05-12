@@ -34,6 +34,10 @@ const MenuConceptos = () => {
           <Link to="/usuario/angel">Angel</Link>
           <Link to="/usuario/jesus">Jesús</Link>
         </li>
+        <li>
+          <span>Parámetros de consulta: </span>
+          <Link to="/productos">Productos</Link>
+        </li>
       </ol>
     </nav>
   );
