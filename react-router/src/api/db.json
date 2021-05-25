@@ -1,0 +1,29 @@
+{
+  "vengadores": [
+    {
+      "id": 1,
+      "name": "Iron Man",
+      "description": "Hombre de Acero"
+    },
+    {
+      "id": 2,
+      "name": "Capitan America",
+      "description": "El primer vengador"
+    },
+    {
+      "id": 3,
+      "name": "Black Widow",
+      "description": "Espia"
+    },
+    {
+      "id": 4,
+      "name": "Ojo de Halcon",
+      "description": "Arquero"
+    },
+    {
+      "id": 5,
+      "name": "Hulk",
+      "description": "Aplasta a todos"
+    }
+  ]
+}
