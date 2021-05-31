@@ -43,7 +43,7 @@ const CrudApi = () => {
     };
 
     api.post(url, options).then((res) => {
-      //console.log(res);
+      console.log(res);
       if (!res.err) {
         setDb([...db, res]);
       } else {
@@ -114,39 +114,44 @@ const CrudApi = () => {
         <Switch>
           <Route exact path="/">
             <h2>Home de vengadores</h2>
+            {loading && <Loader />}
+            {error && (
+              <Message
+                msg={`Error ${error.status}: ${error.statusText}`}
+                bgColor="#dc3545"
+              />
+            )}
+            {db && (
+              <CrudTable
+                data={db}
+                setDataToEdit={setDataToEdit}
+                deleteData={deleteData}
+              />
+            )}
           </Route>
           <Route exact path="/agregar">
             <h2>Agregar vengador</h2>
+            <CrudForm
+              createData={createData}
+              updateData={updateData}
+              dataToEdit={dataToEdit}
+              setDataToEdit={setDataToEdit}
+            />
           </Route>
           <Route exact path="/editar/:id">
             <h2>Editar vengador</h2>
+            <CrudForm
+              createData={createData}
+              updateData={updateData}
+              dataToEdit={dataToEdit}
+              setDataToEdit={setDataToEdit}
+            />
           </Route>
           <Route path="*" children={Error404}></Route>
         </Switch>
       </HashRouter>
       <h2>CRUD API</h2>
-      <article className="grid-1-2">
-        <CrudForm
-          createData={createData}
-          updateData={updateData}
-          dataToEdit={dataToEdit}
-          setDataToEdit={setDataToEdit}
-        />
-        {loading && <Loader />}
-        {error && (
-          <Message
-            msg={`Error ${error.status}: ${error.statusText}`}
-            bgColor="#dc3545"
-          />
-        )}
-        {db && (
-          <CrudTable
-            data={db}
-            setDataToEdit={setDataToEdit}
-            deleteData={deleteData}
-          />
-        )}
-      </article>
+      <article className="grid-1-2"></article>
     </div>
   );
 };

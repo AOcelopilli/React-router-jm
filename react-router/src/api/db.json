@@ -21,9 +21,9 @@
       "description": "Arquero"
     },
     {
-      "id": 5,
       "name": "Hulk",
-      "description": "Aplasta a todos"
+      "description": "Aplasta todo",
+      "id": 1622490105245
     }
   ]
 }
