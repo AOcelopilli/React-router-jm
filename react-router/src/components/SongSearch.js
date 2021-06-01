@@ -5,6 +5,7 @@ import Error404 from "../pages/Error404";
 import { Loader } from "./Loader";
 import SongDetails from "./SongDetails";
 import SongForm from "./SongForm";
+import SongPage from "./SongPage";
 import SongTable from "./SongTable";
 
 const mySongsInit = JSON.parse(localStorage.getItem("mySongs")) || [];
@@ -43,8 +44,13 @@ const SongSearch = () => {
     };
 
     fetchData();
+
     localStorage.setItem("mySongs", JSON.stringify(mySongs));
-  }, [search, mySongs]);
+  }, [mySongs, search]);
+
+  useEffect(() => {
+    localStorage.setItem("mySongs", JSON.stringify(mySongs));
+  }, [mySongs]);
 
   const handleSearch = (data) => {
     //console.log(data);
@@ -52,11 +58,27 @@ const SongSearch = () => {
   };
 
   const handleSaveSong = () => {
-    alert("Salvando cancion");
+    let currentSong = {
+      search,
+      lyrics,
+      bio,
+    };
+
+    setMySongs((mySongs) => [...mySongs, currentSong]);
+    setSearch(null);
   };
 
   const handleDeleteSong = (id) => {
-    alert(`Cancion eliminada de favoritos con el id: ${id}`);
+    //alert(`Cancion eliminada de favoritos con el id: ${id}`);
+    let isDelete = window.confirm(
+      `Estas seguro de eliminar la cancion con el id> ${id}`
+    );
+
+    if (isDelete) {
+      let songs = mySongs.filter((el, index) => index !== id);
+      setMySongs(songs);
+      localStorage.setItem("mySongs", JSON.stringify(songs));
+    }
   };
 
   return (
@@ -82,8 +104,8 @@ const SongSearch = () => {
                 <SongDetails search={search} lyrics={lyrics} bio={bio} />
               )}
             </Route>
-            <Route exact path="/canciones/:id">
-              <h2>Pagina de cancion</h2>
+            <Route exact path="/:id">
+              <SongPage mySongs={mySongs} />
             </Route>
             <Route path="*" children={<Error404 />}></Route>
           </Switch>
