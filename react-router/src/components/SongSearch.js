@@ -5,12 +5,16 @@ import Error404 from "../pages/Error404";
 import { Loader } from "./Loader";
 import SongDetails from "./SongDetails";
 import SongForm from "./SongForm";
+import SongTable from "./SongTable";
+
+const mySongsInit = JSON.parse(localStorage.getItem("mySongs")) || [];
 
 const SongSearch = () => {
   const [search, setSearch] = useState(null);
   const [lyrics, setLyrics] = useState(null);
   const [bio, setBio] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [mySongs, setMySongs] = useState(mySongsInit);
 
   useEffect(() => {
     if (search === null) return;
@@ -39,11 +43,20 @@ const SongSearch = () => {
     };
 
     fetchData();
-  }, [search]);
+    localStorage.setItem("mySongs", JSON.stringify(mySongs));
+  }, [search, mySongs]);
 
   const handleSearch = (data) => {
     //console.log(data);
     setSearch(data);
+  };
+
+  const handleSaveSong = () => {
+    alert("Salvando cancion");
+  };
+
+  const handleDeleteSong = (id) => {
+    alert(`Cancion eliminada de favoritos con el id: ${id}`);
   };
 
   return (
@@ -54,11 +67,17 @@ const SongSearch = () => {
           <Link to="/">Home</Link>
         </header>
         {loading && <Loader />}
-        <article className="grid-1-3">
+        <article className="grid-1-2">
           <Switch>
             <Route exact path="/">
-              <SongForm handleSearch={handleSearch} />
-              <h2>Tabla de Canciones</h2>
+              <SongForm
+                handleSearch={handleSearch}
+                handleSaveSong={handleSaveSong}
+              />
+              <SongTable
+                mySongs={mySongs}
+                handleDeleteSong={handleDeleteSong}
+              />
               {search && !loading && (
                 <SongDetails search={search} lyrics={lyrics} bio={bio} />
               )}
