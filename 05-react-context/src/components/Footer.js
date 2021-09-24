@@ -1,7 +1,7 @@
-const Footer = ({ theme }) => {
+const Footer = ({ theme, texts }) => {
   return (
     <div className={theme}>
-      <h4>Contenido del footer</h4>
+      <h4>{texts.footerTitle}</h4>
     </div>
   );
 };

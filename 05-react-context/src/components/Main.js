@@ -1,9 +1,8 @@
-const Main = ({ theme }) => {
+const Main = ({ theme, texts, auth }) => {
   return (
     <div className={theme}>
-      <p>Bienvenid@ Usuari@</p>
-      <p>Hola Usuari@</p>
-      <p>Contenido principal</p>
+      {auth ? <p>{texts.mainHello}</p> : <p>{texts.mainWelcome}</p>}
+      <p>{texts.mainContent}</p>
     </div>
   );
 };
